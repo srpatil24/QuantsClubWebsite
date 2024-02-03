@@ -1,1 +1,1 @@
-# QuantsClubWebsite
+# Quants Club Website
