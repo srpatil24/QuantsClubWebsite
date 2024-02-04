@@ -393,12 +393,6 @@
 
                 <div class="form-wrapper">
                     <div class="form-side form-front form-content">
-                        <h2>Subscribe to Newsletter</h2>
-                        <input type="email" placeholder="Your Email">
-                        <button onclick="validateNewsletter()">Subscribe</button>
-                        <p id="subscribeValidationText"></p>
-                    </div>
-                    <div class="form-side form-back form-content">
                         <h2>Contact Us</h2>
                         <form id="contactForm" action="https://formsubmit.co/uwquantsclub@gmail.com" method="POST">
                             <input type="hidden" name="_captcha" value="false">
@@ -410,6 +404,12 @@
                             <button onclick="return validateContact(this)">Contact</button>
                             <p id="contactValidationText"></p>
                         </form>
+                    </div>
+                    <div class="form-side form-back form-content">
+                        <h2>Subscribe to Newsletter</h2>
+                        <input type="email" placeholder="Your Email">
+                        <button onclick="validateNewsletter()">Subscribe</button>
+                        <p id="subscribeValidationText"></p>
                     </div>
                 </div>
 
@@ -449,7 +449,6 @@
             }
 
             function validateContact(button) {
-
                 var form = document.getElementById("contactForm");
                 var name = document.getElementById("contactName").value;
                 var email = document.getElementById("contactEmail").value;
