@@ -395,15 +395,19 @@
                     <div class="form-side form-front form-content">
                         <h2>Subscribe to Newsletter</h2>
                         <input type="email" placeholder="Your Email">
-                        <button type="submit">Subscribe</button>
+                        <button onclick="validateNewsletter()">Subscribe</button>
+                        <p id="subscribeValidationText"></p>
                     </div>
                     <div class="form-side form-back form-content">
                         <h2>Contact Us</h2>
-                        <form action="https://formsubmit.co/uwquantsclub@gmail.com" method="POST">
-                            <input type="text" placeholder="Your Name" name="name" required>
-                            <input type="email" placeholder="Your Email" name="email" required>
-                            <textarea placeholder="Your Message" name="message"></textarea>
-                            <button type="submit">Contact</button>
+                        <form id="contactForm" action="https://formsubmit.co/uwquantsclub@gmail.com" method="POST">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_subject" value="Received Contact Form!">
+                            <input id="contactName" type="text" placeholder="Your Name" name="name" required>
+                            <input id="contactEmail" type="email" placeholder="Your Email" name="email" required>
+                            <textarea id="contactMessage" placeholder="Your Message" name="message"></textarea>
+                            <button onclick="return validateContact(this)">Contact</button>
+                            <p id="contactValidationText"></p>
                         </form>
                     </div>
                 </div>
@@ -428,7 +432,6 @@
                     var scrollPosition = window.innerHeight + window.scrollY;
                     var documentHeight = document.body.offsetHeight;
 
-                    // Adjust the threshold (e.g., 20) based on how far from the bottom the glow should appear
                     if (documentHeight - scrollPosition < 20) {
                         document.body.classList.add("show-glow");
                     } else {
@@ -436,6 +439,37 @@
                     }
                 });
             });
+        </script>
+
+        <script>
+
+            function validateNewsletter(button) {
+                button.disabled = true;
+            }
+
+            function validateContact(button) {
+
+                var form = document.getElementById("contactForm");
+                var name = document.getElementById("contactName").value;
+                var email = document.getElementById("contactEmail").value;
+                var message = document.getElementById("contactMessage").value;
+                var validationMessage = document.getElementById("contactValidationText");
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (name.trim() !== "" && message.trim() !== "") {
+                    if (emailRegex.test(email)) {
+                        this.disabled = true;
+                        validationMessage.innerText = "Form submitted!"
+                        form.submit();
+                        return true;
+                    }
+                }
+
+                validationMessage.innerText = "Please enter a valid input";
+                return false;
+
+            }
+
         </script>
 
 </body>
